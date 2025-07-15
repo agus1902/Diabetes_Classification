@@ -1,8 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
 
 import matplotlib.pyplot as plt
 from sklearn import datasets
@@ -11,10 +6,6 @@ import numpy as np
 import pandas as pd
 import math
 from sklearn.model_selection import train_test_split
-
-
-# In[5]:
-
 
 def sigmoid_function(X):
   return 1/(1+math.e**(-X))
@@ -38,16 +29,6 @@ def log_regression4(X, y, alpha, epochs):
     loss_last_epoch = avg_loss #*
   return best_params
 
-
-# In[6]:
-
-
-best_params
-
-
-# In[7]:
-
-
 import numpy as np
 import pandas as pd
 df = pd.read_csv('diabetes.csv')
@@ -67,9 +48,9 @@ actual_y = {'No':0,
             'Yes':0}
 
 for key, y_diabetes_type in y_diabetes_types.items():
-  # Split dataset (training and testing sets)
+
   X_train, X_test, y_train, y_test = train_test_split(X, y_diabetes_type, test_size=0.2, random_state=0)
-  # Scale X
+
   sc = StandardScaler()
   X_train = sc.fit_transform(X_train)
   X_test = sc.transform(X_test)
@@ -77,7 +58,7 @@ for key, y_diabetes_type in y_diabetes_types.items():
   epochs = 10000
   alpha = 0.01
   best_params = log_regression4(X_train, y_train, alpha, epochs)
-  # Make predictions on test set
+
   index_ = 10
   X_to_predict = [list(X_test[index_])]
 
@@ -95,16 +76,3 @@ max_actual_y = max(actual_y, key=actual_y.get)
 print('Real value is: {}'.format(max_actual_y))
 
 
-# In[ ]:
-
-
-
-
-
-# Resumen
-# 
-# Se utilizó la librería sci kit learn para hacer el split para las nuevos data frames de test y train, también se utilizó para realizar normalizar y ajustar los datos, sin embargo no se utilizó para cuestiones de predicción. Lo que se hizo en este programa, primero se definió la función sigmoide que es útil para clasificar a nuestros datos, después se implementó la función logregresion4 para obtener los mejores parámetros que van a afectar a nuestro data Frame de Test.
-# Posterior a esto se realizó la lectura de los bases de datos y dividir las features y el label, esto para poder introducir los datos correctamente a el ciclo for que prueba los valores, best_params que fueron entregados por logregresion4, y que contiene los parámetros que minimizan el avg_loss.
-# Se probó con diferentes valores de epoch y alpha, los mejores valores fueron 1000 y 0.01 respectivamente.
-# 
-# 
